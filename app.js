@@ -1,4 +1,5 @@
 import express from 'express';
+import { faker } from '@faker-js/faker';
 
 import dotenv from 'dotenv';
 
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
 
 app.get('/', (req,res) => {
   res.json({
-    "yes": "yes"
+    "yes": faker.word.adjective({ length: { min: 5, max: 7 }, strategy: "fail" }) + "" + faker.word.noun({ length: { min: 5, max: 7 }, strategy: "fail" })
   })
 })
 

@@ -4,17 +4,30 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema(
     {
+        genre: {
+            type:String,
+            required: true,
+        },
         category: {
             type: String,
             required: true,
         },
         description: {
-            type: String,
-        }
+            type: String
+        },
+        creator: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        date: {
+            type: Date,
+            default: () => Date.now(),
+        },
+
     },
-    { timestamps: true }
 )
 
-const User = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', postSchema);
 
-export default User;
+export default Post;
