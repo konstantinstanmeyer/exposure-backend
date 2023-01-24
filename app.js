@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
 import postRoutes from './routes/posts.js';
+import authRoutes from './routes/auth.js'
 
 dotenv.config();
 
@@ -25,11 +26,13 @@ app.use((req, res, next) => {
 
 app.get('/', (req,res) => {
   res.json({
-    "yes": faker.word.adjective({ length: { min: 5, max: 7 }, strategy: "fail" }) + "" + faker.word.noun({ length: { min: 5, max: 7 }, strategy: "fail" })
+    "yes": faker.word.adjective({ length: { min: 4, max: 7 }, strategy: "fail" }) + " " + faker.word.noun({ length: { min: 4, max: 7 }, strategy: "fail" })
   })
 })
 
 app.use(postRoutes);
+
+app.use(authRoutes);
 
 const PORT = process.env.PORT || 3001;
 

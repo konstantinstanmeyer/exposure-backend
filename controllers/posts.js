@@ -4,7 +4,7 @@ export const postAddProduct = async (req,res) => {
     try {
         const { category, description, genre, author } = req.body;
 
-        const product = new Product({category: category, description: description, genre: genre, author: author })
+        const product = new Product({ category: category, description: description, genre: genre, author: author })
 
         const response = await product.save();
 
