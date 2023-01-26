@@ -1,12 +1,17 @@
-import Product from '../models/post.js';
+import Post from '../models/post.js';
 
 export const postAddProduct = async (req,res) => {
+    const user = req.user;
+
+    if (!user.userId) return res.status(400).json({message: "Not Authorized"});
+
+
     try {
         const { category, description, genre, author } = req.body;
 
-        const product = new Product({ category: category, description: description, genre: genre, author: author })
+        const post = new Post({ category: category, description: description, genre: genre, author: author, creator: user.userId })
 
-        const response = await product.save();
+        const response = await post.save();
 
         res.json(response);
     } catch(err) {
