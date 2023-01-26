@@ -5,7 +5,6 @@ export const postAddProduct = async (req,res) => {
 
     if (!user.userId) return res.status(400).json({message: "Not Authorized"});
 
-
     try {
         const { category, description, genre, author } = req.body;
 
