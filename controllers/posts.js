@@ -6,9 +6,9 @@ export const postAddProduct = async (req,res) => {
     if (!user.userId) return res.status(400).json({message: "Not Authorized"});
 
     try {
-        const { category, description, genre, author } = req.body;
+        const { category, description, genre, imageUrl } = req.body;
 
-        const post = new Post({ category: category, description: description, genre: genre, author: author, creator: user.userId })
+        const post = new Post({ category: category, description: description, genre: genre, creator: user.userId, imageUrl: imageUrl })
 
         const response = await post.save();
 
