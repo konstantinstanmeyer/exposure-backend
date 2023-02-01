@@ -20,9 +20,21 @@ export const register = async (req,res) => {
         });
 
         const response = await user.save();
-        res.json(response);
+
+        console.log(response)
+
+        const username = response.username;
+        const id = response._id;
+
+        const token = jwt.sign({ userId: id }, process.env.JWT_SECRET);
+
+        res.json({ token, username, id });
     } catch(e){
-        res.json({ "message": "Failed Request" });
+        if (e.code === 11000){
+            res.json({ "message": "An account already uses this email"})
+        } else {
+            res.json({ "Message": "Authorization Failed"})
+        }
         console.log(e.message);
     }
 }
