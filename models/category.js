@@ -10,7 +10,13 @@ const categorySchema = new Schema({
     imageUrl: {
         type: String,
         required: true
-    }
+    },
+    subs: [
+        {
+            name: String,
+            imageUrl: String
+        }
+    ]
 });
 
 const Category = mongoose.model('category', categorySchema);
