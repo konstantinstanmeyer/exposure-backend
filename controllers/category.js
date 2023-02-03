@@ -9,7 +9,7 @@ export const addCategory = async (req, res) => {
 
         if (!user || !user.admin) return res.status(400).json({message: "Not Authorized"});
 
-        const category = new Category({ name: req.body.name });
+        const category = new Category({ name: req.body.name, imageUrl: req.body.imageUrl });
 
         const response = await category.save();
 
@@ -17,5 +17,17 @@ export const addCategory = async (req, res) => {
     } catch (e){
         console.log(e);
         res.json(e.message);
+    }
+}
+
+export const getCategories = async (req, res) => {
+    try{
+        const categories = await Category.find().select('name imageUrl -_id');
+
+        const shuffledCategories = categories.sort((a, b) => 0.5 - Math.random());;
+          
+        res.json(shuffledCategories)
+    }catch(e){
+        res.json(e)
     }
 }
