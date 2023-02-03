@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js'
+import categoryRoutes from './routes/category.js';
 
 dotenv.config();
 
@@ -24,6 +25,8 @@ app.use((req, res, next) => {
 app.use(postRoutes);
 
 app.use(authRoutes);
+
+app.use(categoryRoutes);
 
 const PORT = process.env.PORT || 3001;
 
