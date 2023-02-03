@@ -35,7 +35,7 @@ export const register = async (req,res) => {
         } else {
             res.json({ "Message": "Authorization Failed"})
         }
-        console.log(e.message);
+        console.log(e);
     }
 }
 

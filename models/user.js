@@ -32,6 +32,11 @@ const userSchema = new Schema(
             type: Array,
             default: [],
         },
+        followedCategories: [
+            {
+                type: String,
+            }
+        ],
         posts: [
             {
               type: Schema.Types.ObjectId,
