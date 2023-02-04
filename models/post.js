@@ -23,6 +23,12 @@ const postSchema = new Schema(
         imageUrl: {
             type: String
         },
+        sizing: {
+            type: Number,
+            min: 1,
+            max: 3,
+            required: true
+        },
         date: {
             type: Date,
             default: () => Date.now(),
