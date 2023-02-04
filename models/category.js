@@ -13,8 +13,14 @@ const categorySchema = new Schema({
     },
     subs: [
         {
-            name: String,
-            imageUrl: String
+            name: { type: String, required: true },
+            imageUrl: { type: String, required: true },
+            obscurity: {
+                type: Number,
+                required: true,
+                min: 1,
+                max: 5
+            }
         }
     ]
 });
