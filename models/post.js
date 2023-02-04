@@ -27,7 +27,7 @@ const postSchema = new Schema(
             type: Number,
             min: 1,
             max: 3,
-            required: true
+            default: () => Math.floor(Math.random() * 3) + 1
         },
         date: {
             type: Date,
