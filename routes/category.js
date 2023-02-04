@@ -11,6 +11,6 @@ router.get('/categories', getCategories);
 
 router.post('/add-sub-category', auth, addSubCategory);
 
-router.get('/sub-categories/:category/:page', getSubCategories);
+router.get('/sub-categories/:category/:page', auth, getSubCategories);
 
 export default router;
