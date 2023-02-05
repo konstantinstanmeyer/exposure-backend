@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema(
     {
-        genre: {
+        category: {
             type:String,
             required: true,
         },
-        category: {
+        subCategory: {
             type: String,
             required: true,
         },
@@ -26,8 +26,8 @@ const postSchema = new Schema(
         sizing: {
             type: Number,
             min: 1,
-            max: 3,
-            default: () => Math.floor(Math.random() * 3) + 1
+            max: 2,
+            default: () => Math.floor(Math.random() * 2) + 1
         },
         date: {
             type: Date,
