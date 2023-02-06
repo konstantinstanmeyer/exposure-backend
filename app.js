@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js'
 import categoryRoutes from './routes/category.js';
+import suggestionRoutes from './routes/suggestion.js';
 
 dotenv.config();
 

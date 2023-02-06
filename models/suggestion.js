@@ -22,7 +22,15 @@ const suggestionSchema = new Schema(
             required: true,
             min: 1,
             max: 5
+        },
+        type: {
+            type: String,
+            required: true,
         }
     },
     { timestamps: true }
 )
+
+const Suggestion = mongoose.model('Suggestion', SuggestionSchema);
+
+export default Suggestion;
