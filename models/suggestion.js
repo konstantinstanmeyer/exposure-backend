@@ -18,7 +18,7 @@ const suggestionSchema = new Schema(
             type: String
         },
         obscurity: {
-            type: number,
+            type: Number,
             required: true,
             min: 1,
             max: 5
@@ -31,6 +31,6 @@ const suggestionSchema = new Schema(
     { timestamps: true }
 )
 
-const Suggestion = mongoose.model('Suggestion', SuggestionSchema);
+const Suggestion = mongoose.model('Suggestion', suggestionSchema);
 
 export default Suggestion;
