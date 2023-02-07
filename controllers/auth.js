@@ -25,6 +25,8 @@ export const register = async (req,res) => {
 
         const username = response.username;
         const id = response._id;
+        
+        if (!username) return res.json({ message: "Invalid Credentials" })
 
         const token = jwt.sign({ userId: id }, process.env.JWT_SECRET);
 
