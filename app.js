@@ -7,6 +7,8 @@ import authRoutes from './routes/auth.js'
 import categoryRoutes from './routes/category.js';
 import suggestionRoutes from './routes/suggestion.js';
 
+import cors from 'cors';
+
 dotenv.config();
 
 const app = express();
@@ -22,6 +24,8 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+
+app.use(suggestionRoutes);
 
 app.use(postRoutes);
 
