@@ -4,22 +4,24 @@ export const postSuggestion = async(req,res) => {
     try {
         const { username, existingCategory, newCategory, newSubCategory, obscurity, type } = req.body;
 
-        if (type === "Category"){
-            const suggestion = await Suggestion.new({
+        if (type === "Category" && username && newCategory && type){
+            const suggestion = new Suggestion({
                 username: username,
                 newCategory: newCategory,
-                obscurity: obscurity
+                type: type
             });
 
             const response = await suggestion.save();
 
             res.json(response);
 
-        } else if (type === "SubCategory"){
-            const suggestion = await Suggestion.new({
+        } else if (type === "SubCategory" && obscurity && existingCategory && newSubCategory){
+            const suggestion = new Suggestion({
                 username: username,
                 existingCategory: existingCategory,
-                newSubCategory: newSubCategory
+                newSubCategory: newSubCategory,
+                obscurity: obscurity,
+                type: type
             })
 
             const response = await suggestion.save();

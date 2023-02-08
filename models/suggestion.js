@@ -9,19 +9,22 @@ const suggestionSchema = new Schema(
             required: true
         },
         existingCategory: {
-            type: String
+            type: String,
+            default: null
         },
         newCategory: {
-            type: String
+            type: String,
+            default: null
         },
         newSubCategory: {
-            type: String
+            type: String,
+            default: null
         },
         obscurity: {
             type: Number,
-            required: true,
             min: 1,
-            max: 5
+            max: 5,
+            default: null
         },
         type: {
             type: String,
