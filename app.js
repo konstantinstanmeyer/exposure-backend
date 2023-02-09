@@ -34,6 +34,8 @@ app.use(authRoutes);
 
 app.use(categoryRoutes);
 
+app.use(userRoutes);
+
 const PORT = process.env.PORT || 3001;
 
 mongoose
