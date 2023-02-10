@@ -17,6 +17,21 @@ export const postAddProduct = async (req,res) => {
     }
 }
 
+export const getPostById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const post = Post.findOne({ _id: id }).populate('creator', 'username -_id imageUrl');
+
+        const response = await post.save();
+
+        res.json(response);
+    } catch(e){
+        res.status(400).json(e.message)
+        console.log(e);
+    }
+}
+
 export const getSubCategoryPosts = async (req,res) => {
     const { category, subCategory } = req.params;
 
