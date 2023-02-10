@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/add-category', auth, addCategory);
 
-router.get('/categories', getCategories);
+router.get('/categories', auth, getCategories);
 
 router.post('/add-sub-category', auth, addSubCategory);
 
