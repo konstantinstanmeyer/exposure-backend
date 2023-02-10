@@ -8,6 +8,10 @@ const auth = (req, res, next) => {
     }
     const token = auth.split(' ')[1];
     try{
+        if (token === "null") {
+            console.log('ew')
+            return res.status(400).json({ message: "Authorization failed" })
+        }
         decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     }catch(e){
         console.log(e);
