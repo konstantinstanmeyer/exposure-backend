@@ -8,8 +8,6 @@ import categoryRoutes from './routes/category.js';
 import suggestionRoutes from './routes/suggestion.js';
 import userRoutes from './routes/user.js';
 
-import cors from 'cors';
-
 dotenv.config();
 
 const app = express();
