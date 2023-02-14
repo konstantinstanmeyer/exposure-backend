@@ -33,7 +33,7 @@ export const getPostById = async (req, res) => {
 export const getSubCategoryPosts = async (req,res) => {
     const { category, subCategory } = req.params;
 
-    const posts = await Post.find({ category: category, subCategory: subCategory }).populate('creator');
+    const posts = await Post.find({ category: category, subCategory: subCategory }).select('category sizing imageUrl title description subCategory creator').populate('creator', 'pictureUrl username -_id');
 
     res.json({posts});
 }
