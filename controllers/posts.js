@@ -21,7 +21,9 @@ export const getPostById = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const post = await Post.findOne({ _id: id }).populate('creator', 'username -_id pictureUrl');
+        const post = await Post.findOne({ _id: id }).populate('creator', 'username -_id pictureUrl date');
+
+       console.log(new Date(post.date).toString().split(' ').slice(0,4).join(' '));
 
         res.json(post);
     } catch(e){
