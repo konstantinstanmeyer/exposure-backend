@@ -1,4 +1,5 @@
 import Post from '../models/post.js';
+import User from '../models/user.js';
 
 export const postAddProduct = async (req,res) => {
     const user = req.user;
@@ -33,9 +34,46 @@ export const getPostById = async (req, res) => {
 }
 
 export const getSubCategoryPosts = async (req,res) => {
-    const { category, subCategory } = req.params;
+    try {
+        const { category, subCategory } = req.params;
 
-    const posts = await Post.find({ category: category, subCategory: subCategory }).select('category sizing imageUrl title description subCategory creator').populate('creator', 'pictureUrl username -_id');
+        const posts = await Post.find({ category: category, subCategory: subCategory }).select('category sizing imageUrl title description subCategory creator').populate('creator', 'pictureUrl username -_id');
+    
+        res.json({posts});
+    }catch(e){
+        console.log(e);
+        res.json(e.message);
+    }
+}
 
-    res.json({posts});
+export const getEditPost = async (req,res) => {
+    try {
+        const { id } = req.params;
+
+        const post = await Post.findById(id).select('imageUrl description creator, title').populate('creator', 'username');
+
+        res.json(post);
+    } catch(e){
+        console.log(e);
+        res.json(e.message);
+    }
+}
+
+export const postEditPost = async (req, res) => {
+    try {
+        const { title, username, imageUrl, } = req.body;
+
+        const user = await User.findById(req.user.userId);
+
+        const validatedUsername = user.username;
+
+        if(username === validatedUsername) {
+            const post = await Post.findById(req.params.id);
+        } else {
+            res.status(400).json({ message: 'Unauthorized' });
+        }
+    } catch(e) {
+        console.log(e);
+        res.json(e.message);
+    }
 }
