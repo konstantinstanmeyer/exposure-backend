@@ -1,6 +1,5 @@
 import User from '../models/user.js';
 import Post from '../models/post.js';
-import mongoose from 'mongoose';
 
 export const findUserByUsername = async (req, res) => {
     try{
@@ -14,5 +13,16 @@ export const findUserByUsername = async (req, res) => {
     } catch(e){
         res.json({ message: e.message });
         console.log(e);
+    }
+}
+
+export const getImageUrl = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.user.userId }).select('pictureUrl username -_id');
+
+        res.json(user);
+    } catch(e){
+        console.log(e);
+        res.json(e.message);
     }
 }
