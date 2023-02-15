@@ -14,6 +14,6 @@ router.get('/post/:id', auth, getPostById);
 
 router.get('/edit/:id', auth, getEditPost);
 
-router.post('edit/:id', auth, postEditPost);
+router.post('/edit/:id', auth, postEditPost);
 
 export default router;

@@ -68,7 +68,7 @@ export const postEditPost = async (req, res) => {
         const validatedUsername = user.username;
 
         if(username === validatedUsername) {
-            const response = await Post.findOneAndUpdate({ _id:req.params.id}, {$set: { imageUrl: imageUrl, title: title, description: description }});
+            const response = await Post.findOneAndUpdate({ _id:req.params.id}, { $set: { imageUrl: imageUrl, title: title, description: description } });
             res.json(response);
             console.log(response);
         } else {
