@@ -61,14 +61,16 @@ export const getEditPost = async (req,res) => {
 
 export const postEditPost = async (req, res) => {
     try {
-        const { title, username, imageUrl, } = req.body;
+        const { title, username, imageUrl, description } = req.body;
 
         const user = await User.findById(req.user.userId);
 
         const validatedUsername = user.username;
 
         if(username === validatedUsername) {
-            const post = await Post.findById(req.params.id);
+            const response = await Post.findOneAndUpdate({ _id:req.params.id}, {$set: { imageUrl: imageUrl, title: title, description: description }});
+            res.json(response);
+            console.log(response);
         } else {
             res.status(400).json({ message: 'Unauthorized' });
         }
