@@ -1,4 +1,5 @@
 import Post from '../models/post.js';
+import User from '../models/user.js';
 
 export const postAddProduct = async (req,res) => {
     const user = req.user;
@@ -21,7 +22,9 @@ export const getPostById = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const post = await Post.findOne({ _id: id }).populate('creator', 'username -_id imageUrl');
+        const post = await Post.findOne({ _id: id }).populate('creator', 'username -_id pictureUrl date');
+
+       console.log(new Date(post.date).toString().split(' ').slice(0,4).join(' '));
 
         res.json(post);
     } catch(e){
@@ -31,9 +34,48 @@ export const getPostById = async (req, res) => {
 }
 
 export const getSubCategoryPosts = async (req,res) => {
-    const { category, subCategory } = req.params;
+    try {
+        const { category, subCategory } = req.params;
 
-    const posts = await Post.find({ category: category, subCategory: subCategory }).populate('creator');
+        const posts = await Post.find({ category: category, subCategory: subCategory }).select('category sizing imageUrl title description subCategory creator').populate('creator', 'pictureUrl username -_id');
+    
+        res.json({posts});
+    }catch(e){
+        console.log(e);
+        res.json(e.message);
+    }
+}
 
-    res.json({posts});
+export const getEditPost = async (req,res) => {
+    try {
+        const { id } = req.params;
+
+        const post = await Post.findById(id).select('imageUrl description creator, title').populate('creator', 'username');
+
+        res.json(post);
+    } catch(e){
+        console.log(e);
+        res.json(e.message);
+    }
+}
+
+export const postEditPost = async (req, res) => {
+    try {
+        const { title, username, imageUrl, description } = req.body;
+
+        const user = await User.findById(req.user.userId);
+
+        const validatedUsername = user.username;
+
+        if(username === validatedUsername) {
+            const response = await Post.findOneAndUpdate({ _id:req.params.id}, { $set: { imageUrl: imageUrl, title: title, description: description } });
+            res.json(response);
+            console.log(response);
+        } else {
+            res.status(400).json({ message: 'Unauthorized' });
+        }
+    } catch(e) {
+        console.log(e);
+        res.json(e.message);
+    }
 }

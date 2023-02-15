@@ -8,4 +8,6 @@ const router = express.Router();
 
 router.post('/suggestion', auth, postSuggestion);
 
+// router.get('/admin/suggestions', auth, getSuggestions);
+
 export default router;
