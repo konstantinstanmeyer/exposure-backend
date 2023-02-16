@@ -37,3 +37,16 @@ export const getProfileEdit = async (req, res) => {
         res.json(e.message);
     }
 }
+
+export const postProfileEdit = async (req, res) => {
+    try {
+        const { email, username, imageUrl } = req.body;
+
+        const user = await User.findOneAndUpdate({ _id: req.user.userId  }, { $set: { email: email, username: username, imageUrl: imageUrl }});
+
+        res.json(user);
+    } catch(e){
+        console.log(e)
+        res.status(400).json(e.message);
+    }
+}

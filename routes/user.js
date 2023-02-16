@@ -11,4 +11,6 @@ router.get('/imageUrl', auth, getImageUrl);
 
 router.get('/profile', auth, getProfileEdit);
 
+router.post('/profile', auth, );
+
 export default router;
