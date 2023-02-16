@@ -26,3 +26,14 @@ export const getImageUrl = async (req, res) => {
         res.json(e.message);
     }
 }
+
+export const getProfileEdit = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.user.userId }).select('pictureUrl username email -_id');
+
+        res.json(user);
+    } catch(e){
+        console.log(e);
+        res.json(e.message);
+    }
+}
