@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get('/profile/:username', auth, findUserByUsername);
 
-router.get('/imageUrl/:username', auth, getImageUrl);
+router.get('/imageUrl', auth, getImageUrl);
 
 export default router;
