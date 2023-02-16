@@ -1,7 +1,7 @@
 import express from "express";
 
 import auth from '../middleware/auth.js';
-import { findUserByUsername, getImageUrl, getProfileEdit } from "../controllers/user.js";
+import { findUserByUsername, getImageUrl, getProfileEdit, postProfileEdit } from "../controllers/user.js";
 
 const router = express.Router();
 
@@ -11,6 +11,6 @@ router.get('/imageUrl', auth, getImageUrl);
 
 router.get('/profile', auth, getProfileEdit);
 
-router.post('/profile', auth, );
+router.post('/profile', auth, postProfileEdit);
 
 export default router;
