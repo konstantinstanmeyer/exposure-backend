@@ -59,9 +59,13 @@ export const getSubCategories = async (req, res) => {
     try {
         const subCategories = await Category.findOne({ name: req.params.category }).select('-_id name subs')
 
-        subCategories.subs = [...subCategories.subs.slice((req.params.page - 1) * 4, (req.params.page - 1) * 4 + 4)]
+        // subCategories.subs = [...subCategories.subs.slice((req.params.page - 1) * 4, (req.params.page - 1) * 4 + 4)]
 
-        res.json(subCategories)
+        const newSubs = subCategories.subs.filter(sub => sub.obscurity === +req.params.obscurity).slice((req.params.page - 1) * 4, (req.params.page - 1) * 4 + 4)
+
+        subCategories.subs = newSubs;
+
+        res.json(subCategories);
     } catch(e){
 
     }
