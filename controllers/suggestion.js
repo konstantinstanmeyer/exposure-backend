@@ -50,3 +50,17 @@ export const getSuggestions = async(req,res) => {
         res.json(e.message);
     }
 }
+
+export const deleteById = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.userId);
+        
+        if (user.admin) {
+            const response = await Suggestion.deleteById(req.params.id);
+            res.json(response)
+        }
+    } catch(e) {
+        console.log(e);
+        res.json(e.message);
+    }
+}
