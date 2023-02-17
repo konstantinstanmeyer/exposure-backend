@@ -1,4 +1,5 @@
 import Suggestion from '../models/suggestion.js'
+import User from '../models/user.js';
 
 export const postSuggestion = async(req,res) => {
     try {
@@ -33,5 +34,33 @@ export const postSuggestion = async(req,res) => {
     } catch(e){
         console.log(e);
         res.json(e.message);
+    }
+}
+
+export const getSuggestions = async(req,res) => {
+    try {
+        const user = await User.findById(req.user.userId);
+        
+        if (user.admin) {
+            const suggestions = await Suggestion.find();
+            res.json(suggestions);
+        }
+    } catch(e){
+        console.log(e);
+        res.json(e.message);
+    }
+}
+
+export const deleteById = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.userId);
+        
+        if (user.admin) {
+            const response = await Suggestion.deleteOne({ _id: req.params.id});
+            res.json(response)
+        }
+    } catch(e) {
+        console.log(e);
+        res.status(400).json(e.message);
     }
 }

@@ -4,7 +4,7 @@ const auth = (req, res, next) => {
     let decodedToken;
     const auth = req.get('Authorization');
     if (!auth) {
-        res.json({ message: "Not logged in" })
+        return res.json({ message: "Not logged in" })
     }
     const token = auth.split(' ')[1];
     try{
