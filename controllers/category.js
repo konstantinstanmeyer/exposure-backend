@@ -32,14 +32,14 @@ export const addSubCategory = async (req,res) => {
         
         const category = await Category.findOne({ name: req.body.category });
 
-        category.subs.push({ name: req.body.name, imageUrl: req.body.imageUrl, obscurity: req.body.obscurity })
+        category.subs = [...category.subs, { name: req.body.name, imageUrl: req.body.imageUrl, obscurity: req.body.obscurity }];
 
         const response = await category.save();
 
         res.json(response);
     } catch(e){
         console.log(e)
-        res.json(e)
+        res.status(400).json(e)
     }
 }
 
