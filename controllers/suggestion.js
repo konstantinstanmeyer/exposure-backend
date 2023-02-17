@@ -1,4 +1,5 @@
 import Suggestion from '../models/suggestion.js'
+import User from '../models/user.js';
 
 export const postSuggestion = async(req,res) => {
     try {
@@ -29,6 +30,20 @@ export const postSuggestion = async(req,res) => {
             res.json(response);
         } else {
             res.json({ message: "Not enough information provided" })
+        }
+    } catch(e){
+        console.log(e);
+        res.json(e.message);
+    }
+}
+
+export const getSuggestions = async(req,res) => {
+    try {
+        const user = await User.findById(req.user.userId);
+        
+        if (user.admin) {
+            const suggestions = await Suggestion.find();
+            res.json(suggestions);
         }
     } catch(e){
         console.log(e);
