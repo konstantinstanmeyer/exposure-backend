@@ -56,11 +56,11 @@ export const deleteById = async (req, res) => {
         const user = await User.findById(req.user.userId);
         
         if (user.admin) {
-            const response = await Suggestion.deleteById(req.params.id);
+            const response = await Suggestion.deleteOne({ _id: req.params.id});
             res.json(response)
         }
     } catch(e) {
         console.log(e);
-        res.json(e.message);
+        res.status(400).json(e.message);
     }
 }

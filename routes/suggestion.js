@@ -10,6 +10,6 @@ router.post('/suggestion', auth, postSuggestion);
 
 router.get('/admin/suggestions', auth, getSuggestions);
 
-router.post('/admin/suggestion/:id', auth, deleteById)
+router.get('/admin/suggestion/:id', auth, deleteById)
 
 export default router;
