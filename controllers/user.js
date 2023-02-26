@@ -42,7 +42,7 @@ export const postProfileEdit = async (req, res) => {
     try {
         const { email, username, imageUrl } = req.body;
 
-        const user = await User.findOneAndUpdate({ _id: req.user.userId  }, { $set: { email: email, username: username, imageUrl: imageUrl }});
+        const user = await User.findOneAndUpdate({ _id: req.user.userId  }, { $set: { email: email, username: username, pictureUrl: imageUrl }});
 
         res.json(user);
     } catch(e){
